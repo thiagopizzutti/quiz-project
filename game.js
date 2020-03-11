@@ -2,8 +2,11 @@ const question = document.getElementById("question")
 const choices = Array.from(document.getElementsByClassName("choice-text"))
 const questionCounterText = document.getElementById("questionCounter")
 const scoreText = document.getElementById("score")
-console.log(questionCounterText);
-console.log(scoreText);
+const timerCountDown = document.getElementById("question-counter")
+// const timerCountDown = document.getElementById("question-counter")
+// console.log(timerCountDown);
+
+
 
 
 let currentQuestion = {}
@@ -57,9 +60,9 @@ let questions = [{
     /* Question 5 */
     {
         question: "What best describes Smart Contracts?",
-        choice1: "Cryptocurrencies",
-        choice2: "They are contracts to be signed in paper",
-        choice3: "Financial Services",
+        choice1: " Is a self-executing contract with the terms of the agreement between buyer and seller",
+        choice2: "Smart contracts render transactions traceable, transparent, and irreversible",
+        choice3: "Is a computer protocol",
         choice4: "All of the above",
         answer: 4
     },
@@ -117,16 +120,22 @@ let questions = [{
     }
 ]
 
-const CORRECT_ANSWER_TEN_POINTS = 10
-const MAX_NUMBER_OF_QUESTIONS = 10
-const TIMER = 5
+
+// const myObject = (Object.keys(questions[9]))
+// console.log(myObject[1], myObject[2], myObject[3], myObject[4]);
+
+
+
+
+const CORRECT_ANSWER_TEN_POINTS = 10;
+const MAX_NUMBER_OF_QUESTIONS = 10;
 
 
 startGame = () => {
     questionCounter = 0
     score = 0
     availableQuestions = [...questions]
-    // console.log(availableQuestions);
+
     getNewQuestion()
 }
 
@@ -141,10 +150,18 @@ getNewQuestion = () => {
     currentQuestion = availableQuestions[questionIndex]
     question.innerText = currentQuestion.question;
 
-    choices.forEach(choice => {
+
+    choices.sort(() => Math.random() - 0.5).forEach((choice, index) => {
         const number = choice.dataset["number"]
         choice.innerText = currentQuestion["choice" + number]
+        // choice.innerText = currentQuestion["choice" + (index + 1)]
     })
+    console.log(choices);
+
+    // const answerIndex = Math.floor(Math.random() * choices.length)
+    // answerIndex.innerText = currentQuestion["choice"]
+    // console.log(answerIndex);
+
 
     availableQuestions.splice(questionIndex, 1)
     acceptingAnswers = true
@@ -158,17 +175,43 @@ choices.forEach(choice => {
         const selectedAnswer = selectedChoice.dataset["number"]
 
         const classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect"
+        if (classToApply === "correct")
+            incrementScore(CORRECT_ANSWER_TEN_POINTS)
+
+
+
+
 
         selectedChoice.parentElement.classList.add(classToApply)
         setTimeout(() => {
             selectedChoice.parentElement.classList.remove(classToApply)
             getNewQuestion()
-            console.log(selectedChoice, selectedAnswer);
 
-        }, 1000)
-
-
+        }, 500)
     })
 })
+
+incrementScore = num => {
+    score += num;
+    scoreText.innerText = score
+    console.log(score);
+}
+
+const timeLeft = 59
+let time = timeLeft
+
+
+
+setInterval(updateCountDown, 500)
+
+function updateCountDown() {
+    if (time >= 0) {
+        const minutes = Math.floor(time / 60)
+        const seconds = time % 60
+        timerCountDown.innerText = `${seconds}`
+        time--
+    }
+
+}
 
 startGame()
