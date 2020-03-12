@@ -9,7 +9,7 @@ const timerCountDown = document.getElementById("question-counter")
 
 
 
-// let currentQuestion = {}
+let currentQuestion = {}
 let acceptingAnswers = false
 let score = 0
 let questionCounter = 0
@@ -124,12 +124,8 @@ let questions = [{
 // const myObject = (Object.keys(questions[9]))
 // console.log(myObject[1], myObject[2], myObject[3], myObject[4]);
 
-
-
-
 const CORRECT_ANSWER_TEN_POINTS = 10;
 const MAX_NUMBER_OF_QUESTIONS = 1;
-
 
 startGame = () => {
     questionCounter = 0
@@ -142,27 +138,26 @@ startGame = () => {
 getNewQuestion = () => {
     if (availableQuestions.length === 0 || questionCounter >= MAX_NUMBER_OF_QUESTIONS || incrementScore > 10)
         return window.location.assign('/end.html')
-
-
-
-
     questionCounter++ //start counter quiz
     questionCounterText.innerText = `${questionCounter}/${MAX_NUMBER_OF_QUESTIONS}`
+    console.log(questionCounter);
+    console.log(questionCounterText);
 
+
+    /* SELECT QUESTIONS RANDOMLY */
     const questionIndex = Math.floor(Math.random() * availableQuestions.length)
     currentQuestion = availableQuestions[questionIndex]
     question.innerText = currentQuestion.question;
 
-
-
-
+    /* ANSWERS OPTION */
     choices.sort(() => Math.random() - 0.5).forEach((choice, index) => {
         const number = choice.dataset["number"]
         choice.innerText = currentQuestion["choice" + number]
         // choice.innerText = currentQuestion["choice" + (index + 1)]
     })
-    // console.log(choices);
 
+    /* ATTEMPT TO RANDOM ANSWERS */
+    // console.log(choices);
     // const answerIndex = Math.floor(Math.random() * choices.length)
     // answerIndex.innerText = currentQuestion["choice"]
     // console.log(answerIndex);
@@ -171,7 +166,7 @@ getNewQuestion = () => {
     availableQuestions.splice(questionIndex, 1)
     acceptingAnswers = true
 }
-
+/* SELECT CORRECT AND INCORRECT */
 choices.forEach(choice => {
     choice.addEventListener("click", e => {
         if (!acceptingAnswers) return
@@ -182,30 +177,29 @@ choices.forEach(choice => {
         const classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect"
         if (classToApply === "correct")
             incrementScore(CORRECT_ANSWER_TEN_POINTS)
-
-
-
-
-
         selectedChoice.parentElement.classList.add(classToApply)
         setTimeout(() => {
             selectedChoice.parentElement.classList.remove(classToApply)
             getNewQuestion()
-
         }, 500)
     })
 })
-/*  */
+
+
+/* FUNCTION TO INCREMENTO MY SCORES */
 incrementScore = num => {
     score += num;
     scoreText.innerText = score
     console.log(score);
 }
 
+
+/* FUNCTION TO SET TIME REMAINING */
+
 const timeLeft = 59
 let time = timeLeft
 
-setInterval(updateCountDown, 100)
+setInterval(updateCountDown, 1000)
 
 function updateCountDown() {
     if (time >= 0) {
@@ -216,5 +210,4 @@ function updateCountDown() {
     }
 
 }
-
 startGame()
