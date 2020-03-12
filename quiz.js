@@ -133,7 +133,7 @@ let questions = [{
 // console.log(myObject[1], myObject[2], myObject[3], myObject[4]);
 
 const CORRECT_ANSWER_TEN_POINTS = 10;
-const MAX_NUMBER_OF_QUESTIONS = 3;
+const MAX_NUMBER_OF_QUESTIONS = 10;
 
 startGame = () => {
     questionCounter = 0
