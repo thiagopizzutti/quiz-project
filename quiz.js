@@ -125,7 +125,7 @@ let questions = [{
 // console.log(myObject[1], myObject[2], myObject[3], myObject[4]);
 
 const CORRECT_ANSWER_TEN_POINTS = 10;
-const MAX_NUMBER_OF_QUESTIONS = 1;
+const MAX_NUMBER_OF_QUESTIONS = 10;
 
 startGame = () => {
     questionCounter = 0
@@ -136,8 +136,20 @@ startGame = () => {
 }
 
 getNewQuestion = () => {
-    if (availableQuestions.length === 0 || questionCounter >= MAX_NUMBER_OF_QUESTIONS || incrementScore > 10)
-        return window.location.assign('/end.html')
+    if (availableQuestions.length === 0 || questionCounter >= MAX_NUMBER_OF_QUESTIONS || incrementScore > 10) {
+
+        let finalScore = document.querySelector('.final-score')
+        finalScore.style.transform = "translateX(0)";
+        
+        let finalPageScore = document.querySelector(".final-page-score")
+finalPageScore.innerHTML = score
+       
+       
+       
+        //  return window.location.assign('/end.html')
+    }
+
+
     questionCounter++ //start counter quiz
     questionCounterText.innerText = `${questionCounter}/${MAX_NUMBER_OF_QUESTIONS}`
     console.log(questionCounter);
@@ -154,6 +166,7 @@ getNewQuestion = () => {
         const number = choice.dataset["number"]
         choice.innerText = currentQuestion["choice" + number]
         // choice.innerText = currentQuestion["choice" + (index + 1)]
+
     })
 
     /* ATTEMPT TO RANDOM ANSWERS */
@@ -166,6 +179,8 @@ getNewQuestion = () => {
     availableQuestions.splice(questionIndex, 1)
     acceptingAnswers = true
 }
+
+
 /* SELECT CORRECT AND INCORRECT */
 choices.forEach(choice => {
     choice.addEventListener("click", e => {

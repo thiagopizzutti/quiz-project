@@ -5,18 +5,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap"
-      rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap"
+    rel="stylesheet">
   <meta http-equiv="X-UA-Compatible"
     content="ie=edge" />
   <title>Quick Quiz - Play</title>
   <link rel="stylesheet"
-    href="app.css" />
+    href="app.css">
   <link rel="stylesheet"
     href="quiz.css" />
 </head>
-<!--  -->
+
 <body>
   <div class="container">
     <div id="game"
@@ -60,6 +59,19 @@
         <p class="choice-text"
           data-number="4"></p>
       </div>
+    </div>
+  </div>
+  <div class="final-score">
+    <div id="home"
+      class="flex-center flex-column ">
+      <div id="hud-item">
+        <p class="hud-prefix"> Your final score is: <span class="final-page-score head-main-text"></span> </p>
+        <h1 class="head-main-text"
+          id="score"></h1>
+      </div>
+      <h1 class="land-page-title">Wow, you are doing super fine.</h1>
+      <a href="/quiz.html"
+        class="btn">Try Again</a>
     </div>
   </div>
   <script src="quiz.js"></script>

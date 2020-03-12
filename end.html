@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap"
-            rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet"
         href="app.css">
+    <link rel="stylesheet"
+        href="quiz.css">
     <title>Document</title>
 </head>
 
@@ -17,11 +18,14 @@
     <div class="container">
         <div id="home"
             class="flex-center flex-column ">
+            <div id="hud-item">
+                <p class="hud-prefix"> Your final score is: </p>
+                <h1 class="head-main-text"
+                    id="score"></h1>
+            </div>
             <h1 class="land-page-title">Wow, you are doing super fine.</h1>
             <a href="/quiz.html"
-                class="btn">Read again</a>
-            <a href="/quiz.html"
-                class="btn">Go back to Quiz</a>
+                class="btn">Try Again</a>
         </div>
     </div>
 </body>

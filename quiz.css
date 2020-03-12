@@ -5,7 +5,9 @@
   font-size: 1.8rem;
   border: 0.1rem solid rgba(8, 10, 12, 0.25);
   background-color: rgb(255, 255, 255);
+
 }
+
 /*  */
 .choice-container:hover {
   cursor: pointer;
@@ -25,11 +27,16 @@
   width: 100%;
 }
 
-.correct{
-  background-color:#28a745
+.correct {
+  background-color: #28a745
 }
 
-.incorrect{
+.incorrect {
   background-color: rgb(192, 32, 3);
 
+}
+
+.final-page-score {
+  font-size: 5rem;
+  font-weight: bold;
 }
