@@ -3,6 +3,14 @@ const choices = Array.from(document.getElementsByClassName("choice-text"))
 const questionCounterText = document.getElementById("questionCounter")
 const scoreText = document.getElementById("score")
 const timerCountDown = document.getElementById("question-counter")
+const correctAnswer = new Audio()
+const wrongAnswer = new Audio()
+const winSound = new Audio()
+correctAnswer.src = "audio.wav"
+wrongAnswer.src = "wrongAnswer.mp3"
+winSound.src = "won.wav"
+
+
 // const timerCountDown = document.getElementById("question-counter")
 // console.log(timerCountDown);
 
@@ -125,7 +133,7 @@ let questions = [{
 // console.log(myObject[1], myObject[2], myObject[3], myObject[4]);
 
 const CORRECT_ANSWER_TEN_POINTS = 10;
-const MAX_NUMBER_OF_QUESTIONS = 10;
+const MAX_NUMBER_OF_QUESTIONS = 3;
 
 startGame = () => {
     questionCounter = 0
@@ -144,6 +152,7 @@ getNewQuestion = () => {
         let finalPageScore = document.querySelector(".final-page-score")
         finalPageScore.innerHTML = score
 
+        winSound.play()
 
 
         //  return window.location.assign('/end.html')
@@ -184,19 +193,29 @@ getNewQuestion = () => {
 /* SELECT CORRECT AND INCORRECT */
 choices.forEach(choice => {
     choice.addEventListener("click", e => {
-        if (!acceptingAnswers) return
+        if (!acceptingAnswers)
+            return
         acceptingAnswers = false
+
         const selectedChoice = e.target
         const selectedAnswer = selectedChoice.dataset["number"]
 
+
         const classToApply = selectedAnswer == currentQuestion.answer ? "correct" : "incorrect"
-        if (classToApply === "correct")
-            incrementScore(CORRECT_ANSWER_TEN_POINTS)
+        if (classToApply === "correct") {
+            correctAnswer.play()
+        } else {
+            wrongAnswer.play()
+        }
+
+        incrementScore(CORRECT_ANSWER_TEN_POINTS)
         selectedChoice.parentElement.classList.add(classToApply)
+
         setTimeout(() => {
             selectedChoice.parentElement.classList.remove(classToApply)
             getNewQuestion()
-        }, 500)
+
+        }, 1200)
     })
 })
 
@@ -211,7 +230,7 @@ incrementScore = num => {
 
 /* FUNCTION TO SET TIME REMAINING */
 
-const timeLeft = 59
+const timeLeft = 120
 let time = timeLeft
 
 setInterval(updateCountDown, 1000)
