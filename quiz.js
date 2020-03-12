@@ -9,7 +9,7 @@ const timerCountDown = document.getElementById("question-counter")
 
 
 
-let currentQuestion = {}
+// let currentQuestion = {}
 let acceptingAnswers = false
 let score = 0
 let questionCounter = 0
@@ -128,7 +128,7 @@ let questions = [{
 
 
 const CORRECT_ANSWER_TEN_POINTS = 10;
-const MAX_NUMBER_OF_QUESTIONS = 10;
+const MAX_NUMBER_OF_QUESTIONS = 1;
 
 
 startGame = () => {
@@ -140,8 +140,11 @@ startGame = () => {
 }
 
 getNewQuestion = () => {
-    if (availableQuestions.length === 0 || questionCounter >= MAX_NUMBER_OF_QUESTIONS)
+    if (availableQuestions.length === 0 || questionCounter >= MAX_NUMBER_OF_QUESTIONS || incrementScore > 10)
         return window.location.assign('/end.html')
+
+
+
 
     questionCounter++ //start counter quiz
     questionCounterText.innerText = `${questionCounter}/${MAX_NUMBER_OF_QUESTIONS}`
@@ -151,12 +154,14 @@ getNewQuestion = () => {
     question.innerText = currentQuestion.question;
 
 
+
+
     choices.sort(() => Math.random() - 0.5).forEach((choice, index) => {
         const number = choice.dataset["number"]
         choice.innerText = currentQuestion["choice" + number]
         // choice.innerText = currentQuestion["choice" + (index + 1)]
     })
-    console.log(choices);
+    // console.log(choices);
 
     // const answerIndex = Math.floor(Math.random() * choices.length)
     // answerIndex.innerText = currentQuestion["choice"]
@@ -194,15 +199,13 @@ choices.forEach(choice => {
 incrementScore = num => {
     score += num;
     scoreText.innerText = score
-    console.log(score);
+    //console.log(score);
 }
 
 const timeLeft = 59
 let time = timeLeft
 
-
-
-setInterval(updateCountDown, 500)
+setInterval(updateCountDown, 100)
 
 function updateCountDown() {
     if (time >= 0) {
