@@ -195,11 +195,11 @@ choices.forEach(choice => {
         }, 500)
     })
 })
-
+/*  */
 incrementScore = num => {
     score += num;
     scoreText.innerText = score
-    //console.log(score);
+    console.log(score);
 }
 
 const timeLeft = 59
