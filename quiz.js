@@ -140,12 +140,12 @@ getNewQuestion = () => {
 
         let finalScore = document.querySelector('.final-score')
         finalScore.style.transform = "translateX(0)";
-        
+
         let finalPageScore = document.querySelector(".final-page-score")
-finalPageScore.innerHTML = score
-       
-       
-       
+        finalPageScore.innerHTML = score
+
+
+
         //  return window.location.assign('/end.html')
     }
 
